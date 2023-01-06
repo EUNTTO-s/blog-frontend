@@ -1,6 +1,6 @@
 module.exports = {
   parser: '@typescript-eslint/parser',
-  plugins: ['@typescript-eslint', 'prettier'],
+  plugins: ['@typescript-eslint', 'prettier', 'prefer-arrow'],
   extends: [
     'airbnb',
     'plugin:react/recommended',
@@ -11,6 +11,14 @@ module.exports = {
     'plugin:prettier/recommended',
   ],
   rules: {
+    'prefer-arrow/prefer-arrow-functions': [
+      'warn',
+      {
+        disallowPrototype: true,
+        singleReturnOnly: false,
+        classPropertiesAllowed: false,
+      },
+    ],
     'linebreak-style': 0,
     'import/prefer-default-export': 0,
     'prettier/prettier': 0,

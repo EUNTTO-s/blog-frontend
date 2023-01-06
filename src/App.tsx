@@ -1,6 +1,11 @@
-import React from "react";
+import React from 'react';
 
 function App() {
+  const testFunt = () => {
+    for (let i = 0; i < 10; i++) {
+      console.log(i);
+    }
+  };
   return (
     <div className="App">
       <header className="App-header">
@@ -15,6 +20,7 @@ function App() {
         >
           Learn React
         </a>
+        <div onClick={testFunt}>테스트</div>
       </header>
     </div>
   );
