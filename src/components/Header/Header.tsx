@@ -25,9 +25,6 @@ const Header = () => {
 
   const requestHeaders: HeadersInit = new Headers();
   requestHeaders.set('Content-Type', 'application/json');
-  if (token) {
-    requestHeaders.set('Authorization', token);
-  }
 
   const openLogin = () => {
     setOpen(!open);
@@ -48,6 +45,7 @@ const Header = () => {
   }, [localStorage.getItem('token')]);
 
   useEffect(() => {
+    if (token) requestHeaders.set('Authorization', token);
     if (localStorage.getItem('token'))
       fetch(`${process.env.REACT_APP_API_URL}/user`, {
         headers: requestHeaders,
