@@ -18,6 +18,7 @@ interface Props {
 }
 
 const WritePost = ({ status, postId }: Props) => {
+  console.log(postId);
   const [form, setForm] = useState<Record<string, string | File>>({
     title: '',
     categoryId: '',
@@ -35,7 +36,7 @@ const WritePost = ({ status, postId }: Props) => {
     setForm({ ...form, [name]: value });
   };
   const navigate = useNavigate();
-
+  const id = postId;
   useEffect(() => {
     if (status) {
       fetch(`${process.env.REACT_APP_API_URL}/posts/${postId}`, {
@@ -66,13 +67,16 @@ const WritePost = ({ status, postId }: Props) => {
     if (status) {
       await axios_({
         method: 'PATCH',
-        url: `/posts`,
+        url: `/posts/${id}`,
         headers: {
           'Content-Type': 'multipart/form-data',
           authorization: localStorage.getItem('token'),
         },
         data: blogData,
-      }).then((res) => navigate(`/post/${res.data.data.postId}`));
+      }).then((res) => {
+        navigate(`/post/${id}`);
+        window.location.reload();
+      });
     } else {
       await axios_({
         method: 'POST',
@@ -92,7 +96,7 @@ const WritePost = ({ status, postId }: Props) => {
       <div className={css.totalWrap}>
         <div className={css.container}>
           <div className={css.nav}>
-            <NavBar change={change} />
+            <NavBar change={change} post={post} />
           </div>
           <div className={css.containerWrap}>
             <div className={css.InputWrap}>

@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import css from './NavBar.module.scss';
-
+import { postDataType } from '../../TotalPost/TotalPost';
 interface Props {
   change: (key: string, value: string) => void;
+  post?: postDataType;
 }
 
 interface Topics {
